@@ -1,0 +1,83 @@
+/* Container general */
+.categoria-form-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f4f4f4;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  font-family: Arial, sans-serif;
+}
+
+/* Títulos */
+.categoria-form-container h2 {
+  text-align: center;
+  color: #8a1538;
+  margin-bottom: 20px;
+}
+
+/* Formulario */
+.categoria-form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+.categoria-form-container label {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Inputs */
+.categoria-form-container input[type="text"] {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+/* Botones generales */
+.categoria-form-container button,
+.categoria-form-container .btn-volver {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  margin-top: 10px;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+}
+
+/* Botón guardar / eliminar */
+.categoria-form-container button {
+  background-color: #8a1538;
+  color: #fff;
+}
+
+.categoria-form-container button:hover {
+  background-color: #6f0f2b;
+}
+
+/* Botón crear / volver */
+.categoria-form-container .btn-volver {
+  background-color: #66b5cb;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.categoria-form-container .btn-volver:hover {
+  background-color: #558fa0;
+}
+
+/* Mensajes de alerta / loading */
+.categoria-form-container .loading {
+  text-align: center;
+  font-size: 18px;
+  color: #8a1538;
+}

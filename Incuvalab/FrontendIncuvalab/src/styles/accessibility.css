@@ -1,0 +1,80 @@
+/* src/styles/accessibility.css */
+
+/* Mejoras de focus para accesibilidad */
+:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+  
+  /* Asegurar contraste adecuado */
+  .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  
+  /* Mejoras para visualización en dispositivos móviles */
+  @media (max-width: 640px) {
+    html {
+      font-size: 15px; /* Texto ligeramente más grande en móvil */
+    }
+    
+    button, 
+    input, 
+    select, 
+    textarea {
+      font-size: 1rem; /* Controles más grandes para facilitar el toque */
+    }
+    
+    .container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+  
+  /* Mejorar diseño responsive */
+  .responsive-container {
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  @media (min-width: 640px) {
+    .responsive-container {
+      max-width: 640px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .responsive-container {
+      max-width: 768px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .responsive-container {
+      max-width: 1024px;
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    .responsive-container {
+      max-width: 1280px;
+    }
+  }
+  
+  /* Visibilidad en diferentes tamaños de pantalla */
+  .hide-on-mobile {
+    display: none;
+  }
+  
+  @media (min-width: 640px) {
+    .hide-on-mobile {
+      display: block;
+    }
+    
+    .show-on-mobile {
+      display: none;
+    }
+  }

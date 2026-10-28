@@ -1,0 +1,88 @@
+/* Contenedor principal y título */
+.crear-proyecto-container {
+  padding: 2rem;
+  max-width: 700px;
+  margin: 2rem auto;
+  background: #880430;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.crear-proyecto-container h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+/* Formulario y campos */
+.crear-proyecto-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  color: white;
+}
+
+.crear-proyecto-form input,
+.crear-proyecto-form textarea {
+  margin-top: 0.4rem;
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.crear-proyecto-form input:focus,
+.crear-proyecto-form textarea:focus {
+  border-color: #66b5cb;
+  outline: none;
+}
+
+/* Botón */
+.btn-crearP {
+  width: 100%;
+  background-color: #66b5cb;
+  color: white;
+  padding: 0.9rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-crearP:hover {
+  background-color: #3fa1aa;
+}
+
+/* Redes Sociales y Asesorías */
+.crear-proyecto-form fieldset {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.crear-proyecto-form fieldset legend {
+  font-weight: 600;
+  padding: 0 0.5rem;
+}
+
+/* Alineación correcta de los checkboxes de asesorías */
+.crear-proyecto-form fieldset label {
+  display: flex;
+  flex-direction: row; 
+  align-items: center; 
+  justify-content: space-between; 
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.crear-proyecto-form fieldset input[type="checkbox"] {
+  flex-shrink: 0; 
+  margin-left: auto; 
+}

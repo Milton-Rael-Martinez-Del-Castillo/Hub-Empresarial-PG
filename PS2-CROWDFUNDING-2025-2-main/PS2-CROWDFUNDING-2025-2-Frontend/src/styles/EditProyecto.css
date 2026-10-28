@@ -1,0 +1,96 @@
+/* EditProyecto.css */
+
+/* Contenedor principal */
+.crud-containers {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f7f9fc;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Título */
+.crud-containers h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+/* Formulario */
+.form-crud {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Labels */
+.form-crud label {
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+/* Inputs y textarea */
+.form-crud input[type="text"],
+.form-crud input[type="date"],
+.form-crud input[type="file"],
+.form-crud textarea {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-crud input[type="text"]:focus,
+.form-crud input[type="date"]:focus,
+.form-crud textarea:focus {
+  border-color: #4a90e2;
+  outline: none;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+
+/* Textarea */
+.form-crud textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Imagen de preview */
+.proyecto-img {
+  max-width: 200px;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+/* Botón principal */
+.btn-azul {
+  padding: 12px;
+  background-color: #4a90e2;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-azul:hover {
+  background-color: #357ab8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .crud-container {
+    padding: 20px;
+    margin: 20px;
+  }
+}

@@ -1,0 +1,202 @@
+services:
+
+  # ════════════════════════════════════════════
+  #  HUB EMPRESARIAL — Frontend
+  #  React + Vite + TypeScript → nginx:alpine
+  #  http://localhost:8080
+  # ════════════════════════════════════════════
+  hub-frontend:
+    build:
+      context: ./Hub-Frontend
+      dockerfile: Dockerfile
+    container_name: hub-frontend
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    networks:
+      - hub-network
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ════════════════════════════════════════════
+  #  HUB EMPRESARIAL — Base de datos (MySQL 8)
+  #  host: 3307 → contenedor: 3306
+  # ════════════════════════════════════════════
+  hub-db:
+    image: mysql:8.0
+    container_name: hub-db
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=${HUB_DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${HUB_DB_DATABASE}
+    ports:
+      - "3307:3306"
+    volumes:
+      - hub-db-data:/var/lib/mysql
+    networks:
+      - hub-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${HUB_DB_ROOT_PASSWORD}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  # ════════════════════════════════════════════
+  #  HUB EMPRESARIAL — Backend (Express.js)
+  #  http://localhost:8083
+  #  Admin + formularios NAE y UMA
+  # ════════════════════════════════════════════
+  hub-backend:
+    build:
+      context: ./Hub-Backend
+      dockerfile: Dockerfile
+    container_name: hub-backend
+    restart: unless-stopped
+    ports:
+      - "8083:8083"
+    environment:
+      - PORT=8083
+      - DB_SERVER=${HUB_DB_SERVER}
+      - DB_HOST=${HUB_DB_SERVER}
+      - DB_USER=${HUB_DB_USER}
+      - DB_PASSWORD=${HUB_DB_PASSWORD}
+      - DB_DATABASE=${HUB_DB_DATABASE}
+      - JWT_SECRET=${HUB_JWT_SECRET}
+      - ADMIN_DEFAULT_NAME=${HUB_ADMIN_DEFAULT_NAME}
+      - ADMIN_DEFAULT_EMAIL=${HUB_ADMIN_DEFAULT_EMAIL}
+      - ADMIN_DEFAULT_PASSWORD=${HUB_ADMIN_DEFAULT_PASSWORD}
+      - INCUVALAB_API_URL=${HUB_INCUVALAB_API_URL}
+      - CROWDFUNDING_API_URL=${HUB_CROWDFUNDING_API_URL}
+    depends_on:
+      hub-db:
+        condition: service_healthy
+    networks:
+      - hub-network
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8083/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ════════════════════════════════════════════
+  #  INCUVALAB — Backend (Express.js)
+  #  http://localhost:8000
+  # ════════════════════════════════════════════
+  incuvalab-backend:
+    build:
+      context: ./Incuvalab/BackendIncuvalab
+      dockerfile: Dockerfile
+    container_name: incuvalab-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - DB_SERVER=${INCUVALAB_DB_SERVER}
+      - DB_HOST=${INCUVALAB_DB_SERVER}
+      - DB_USER=${INCUVALAB_DB_USER}
+      - DB_PASSWORD=${INCUVALAB_DB_PASSWORD}
+      - DB_DATABASE=${INCUVALAB_DB_DATABASE}
+    networks:
+      - hub-network
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  # ════════════════════════════════════════════
+  #  INCUVALAB — Frontend (React + Vite → nginx)
+  #  http://localhost:8081
+  # ════════════════════════════════════════════
+  incuvalab-frontend:
+    build:
+      context: ./Incuvalab/FrontendIncuvalab
+      dockerfile: Dockerfile
+    container_name: incuvalab-frontend
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    depends_on:
+      incuvalab-backend:
+        condition: service_healthy
+    networks:
+      - hub-network
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ════════════════════════════════════════════
+  #  CROWDFUNDING — Backend (Express.js ESM)
+  #  http://localhost:4000
+  # ════════════════════════════════════════════
+  crowdfunding-backend:
+    build:
+      context: ./PS2-CROWDFUNDING-2025-2-main/BackendCrowfunding
+      dockerfile: dockerfile
+    container_name: crowdfunding-backend
+    restart: unless-stopped
+    ports:
+      - "4001:4000"
+    environment:
+      - DB_HOST=${CROWDFUNDING_DB_HOST}
+      - DB_PORT=${CROWDFUNDING_DB_PORT:-3306}
+      - DB_USER=${CROWDFUNDING_DB_USER}
+      - DB_PASSWORD=${CROWDFUNDING_DB_PASSWORD}
+      - DB_NAME=${CROWDFUNDING_DB_NAME}
+      - CLIENT_ORIGIN=${CROWDFUNDING_CLIENT_ORIGIN:-http://localhost:8082}
+    networks:
+      - hub-network
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:4000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  # ════════════════════════════════════════════
+  #  CROWDFUNDING — Frontend (React + Vite → nginx)
+  #  http://localhost:8082
+  # ════════════════════════════════════════════
+  crowdfunding-frontend:
+    build:
+      context: ./PS2-CROWDFUNDING-2025-2-main/PS2-CROWDFUNDING-2025-2-Frontend
+      dockerfile: dockerfile
+    container_name: crowdfunding-frontend
+    restart: unless-stopped
+    ports:
+      - "8082:80"
+    depends_on:
+      crowdfunding-backend:
+        condition: service_healthy
+    networks:
+      - hub-network
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+# ════════════════════════════════════════════
+#  Red compartida entre todos los servicios
+# ════════════════════════════════════════════
+networks:
+  hub-network:
+    driver: bridge
+
+# ════════════════════════════════════════════
+#  Volúmenes persistentes
+# ════════════════════════════════════════════
+volumes:
+  hub-db-data:

@@ -1,0 +1,160 @@
+/* ===== Sección FAQ: fondo blanco con adornos sutiles de marca ===== */
+.faq-section{
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  color: #1b1b1b;
+  padding: 32px 0 56px;
+  overflow: hidden;
+}
+
+/* Diseños suaves en el fondo (esquinas) */
+.faq-section::before,
+.faq-section::after{
+  content:"";
+  position:absolute;
+  z-index:0;
+  pointer-events:none;
+  filter: blur(40px);
+  opacity: .18;
+}
+.faq-section::before{
+  top:-80px; right:-120px;
+  width: 320px; height: 320px;
+  background: radial-gradient(closest-side, var(--brand-secondary, #66b5cb), transparent 70%);
+}
+.faq-section::after{
+  bottom:-100px; left:-140px;
+  width: 360px; height: 360px;
+  background: radial-gradient(closest-side, var(--brand-primary, #880430), transparent 70%);
+}
+
+/* Contenedor */
+.faq-container{
+  position: relative;
+  z-index:1;
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Título */
+.faq-heading{
+  margin: 0;
+  text-align: center;
+  font-size: clamp(1.8rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: #121212;
+  letter-spacing: .2px;
+  font-family: "DM Serif Display", serif;
+}
+.faq-underline{
+  width: 140px;
+  height: 3px;
+  background: var(--brand-primary, #880430);
+  margin: 10px auto 28px;
+  border-radius: 999px;
+}
+
+/* Grilla */
+.faq-grid{
+  display: grid;
+  gap: 22px;
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 1100px){ .faq-grid{ grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 900px) { .faq-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 580px) { .faq-grid{ grid-template-columns: 1fr; } }
+
+/* ===== Card con borde degradado grueso y movimiento ===== */
+.faq-card{
+  position: relative;
+  background: #ffffff;
+  color: #2a2a2a;
+  border-radius: 16px;
+
+  /* el borde real lo “pintaremos” con ::before */
+  border: 6px solid transparent;  
+  padding: 18px 18px 16px;
+
+  box-shadow: 0 1px 0 rgba(0,0,0,.02);
+  transition: transform .28s cubic-bezier(.2,.8,.2,1),
+              box-shadow .28s, background .28s, border-color .28s;
+}
+
+/* Borde degradado */
+.faq-card::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 6px; 
+  background: linear-gradient(135deg,
+              var(--brand-primary, #880430),
+              var(--brand-secondary, #66b5cb));
+
+  /* hacer que el gradiente se vea SOLO como borde */
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask:         linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); 
+  -webkit-mask-composite: xor;   
+          mask-composite: exclude; 
+
+  opacity: .6;
+  transition: opacity .25s ease, filter .25s ease;
+  pointer-events: none;
+}
+
+.faq-card:hover,
+.faq-card:focus-visible{
+  transform: translateY(-7px) scale(1.012);
+  box-shadow: 0 14px 28px rgba(0,0,0,.10);
+  background: #fff;
+}
+
+.faq-card:hover::before,
+.faq-card:focus-visible::before{
+  opacity: 1;
+  animation: faq-border-pan 1.5s linear infinite;
+  filter: saturate(1.05);
+}
+
+/* Tipografía interna */
+.faq-card__q{
+  margin: 0 0 8px 0;
+  font-weight: 900;
+  font-size: 1.06rem;
+  font-family: var(--font-heading, "DM Serif Display", serif);
+  color: #0f0f0f;
+  letter-spacing: .2px;
+}
+.faq-card__a{
+  margin: 0;
+  font-size: .995rem;
+  line-height: 1.62;
+  color: #363636;
+}
+
+/* Foco accesible */
+.faq-card:focus-visible{
+  outline: 3px solid color-mix(in oklab, var(--brand-secondary, #66b5cb) 55%, transparent);
+  outline-offset: 3px;
+}
+
+/* Animación del borde */
+@keyframes faq-border-pan{
+  0%   { background-position: 0% 50%;    background-size: 200% 100%; }
+  100% { background-position: 200% 50%;  background-size: 200% 100%; }
+}
+
+/* Respeto por usuarios con “reducir movimiento” */
+@media (prefers-reduced-motion: reduce){
+  .faq-card, .faq-card::before{ transition: none !important; }
+  .faq-card:hover, .faq-card:focus-visible{
+    transform: none;
+    box-shadow: 0 8px 18px rgba(0,0,0,.08);
+  }
+  .faq-card:hover::before, .faq-card:focus-visible::before{
+    animation: none;
+  }
+}

@@ -1,0 +1,99 @@
+.editar-proyecto-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+  background: #a71d2a;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.editar-proyecto-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.form-proyecto .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-proyecto label {
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.form-proyecto input[type="text"],
+.form-proyecto input[type="date"],
+.form-proyecto textarea,
+.form-proyecto select {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-proyecto textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.asesorias .checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.asesorias .checkboxes label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #fff;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.btn-submit {
+  background: #66b5cb;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+  background: #0056b3;
+}
+
+.existing-files {
+  margin-top: 30px;
+}
+
+.imagenes-existentes {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.imagenes-existentes img {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  margin-bottom: 15px;
+}

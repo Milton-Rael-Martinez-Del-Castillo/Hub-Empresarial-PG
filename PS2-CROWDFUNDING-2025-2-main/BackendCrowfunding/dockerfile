@@ -1,0 +1,44 @@
+# ─────────────────────────────────────────────
+# Stage 1: Install production dependencies
+# ─────────────────────────────────────────────
+FROM node:22-alpine AS deps
+
+WORKDIR /app
+
+# Copy dependency manifests
+COPY package.json package-lock.json ./
+
+# Install only production dependencies (skip nodemon and other devDeps)
+RUN npm ci --omit=dev --frozen-lockfile
+
+# ─────────────────────────────────────────────
+# Stage 2: Runtime
+# ─────────────────────────────────────────────
+FROM node:22-alpine AS runner
+
+# Create non-root user for security
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+WORKDIR /app
+
+# Copy production node_modules from deps stage
+COPY --from=deps /app/node_modules ./node_modules
+
+# Copy application source code (ESM: type=module, entry: src/index.js)
+COPY src/ ./src/
+
+# Create uploads directory for multer and set correct ownership
+RUN mkdir -p uploads && chown -R appuser:appgroup /app
+
+# Switch to non-root user
+USER appuser
+
+# Expose the backend API port
+EXPOSE 4000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD wget -qO- http://localhost:4000/ || exit 1
+
+# Start the server
+CMD ["node", "src/index.js"]

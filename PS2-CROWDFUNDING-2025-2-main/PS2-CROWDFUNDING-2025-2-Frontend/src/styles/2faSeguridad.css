@@ -1,0 +1,43 @@
+.titulo {
+text-align: center;
+color: #66B5CB;
+text-decoration: underline;
+}
+
+.ColorTitulo {
+    color: #880430;
+    text-decoration: underline;
+}
+.DobleConf {
+    padding-left: 20px;
+}
+.btn-volverA {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  background-color: #66B5CB;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: background-color 0.25s, transform 0.2s, box-shadow 0.25s;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.btn-volverA:hover {
+  background-color: #4338ca;  /* Más oscuro */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.btn-volverA:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}

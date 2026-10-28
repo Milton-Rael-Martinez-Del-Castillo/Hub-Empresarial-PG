@@ -1,0 +1,98 @@
+/* src/components/pages/moocs/transitions.css */
+
+/* Animación de desvanecimiento */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  /* Animación de deslizamiento desde abajo */
+  @keyframes slideIn {
+    from { 
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .slide-in {
+    animation: slideIn 0.4s ease-out;
+  }
+  
+  /* Animación de deslizamiento desde la derecha */
+  @keyframes slideInRight {
+    from { 
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .slide-in-right {
+    animation: slideInRight 0.3s ease-out;
+  }
+  
+  /* Efecto hover para tarjetas */
+  .card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Animaciones escalonadas para listas de tarjetas */
+  .stagger-item {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  
+  /* Animación de pulso para estados de carga */
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  
+  .pulse {
+    animation: pulse 1.5s infinite;
+  }
+  
+  /* Efecto de escala para botones */
+  .scale-hover {
+    transition: transform 0.15s ease;
+  }
+  
+  .scale-hover:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Transición para la página completa */
+  .page-transition {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  
+  /* Transición para imágenes */
+  .img-zoom {
+    transition: transform 0.5s ease;
+  }
+  
+  .img-zoom:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Transición para filtros */
+  .filter-transition {
+    transition: all 0.3s ease;
+  }

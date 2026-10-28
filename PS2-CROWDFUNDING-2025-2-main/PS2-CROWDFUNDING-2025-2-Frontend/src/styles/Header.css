@@ -1,0 +1,420 @@
+/* =========================
+   Tamaños y colores configurables
+   ========================= */
+:root {
+  --profile-avatar-size: 56px; /* diámetro del círculo */
+  --profile-offset-y: 7px; /* ajuste vertical (+ baja | - sube) */
+  --profile-avatar-bg: #8a1538; /* color base del círculo */
+  --profile-avatar-hover: #66b5cb; /* color del círculo al hover */
+}
+
+/*header*/
+.header {
+  background-color: #fffdfd;
+  color: #000;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  height: 70px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-right: 2rem;
+}
+.logo-img {
+  height: 60px;
+  width: 60px;
+  margin-right: 0.5rem;
+}
+.logo a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+/* =========================
+   Navegación
+   ========================= */
+.nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav a {
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+  padding: 0.25rem 0;
+}
+.nav a:hover {
+  color: #66b5cb;
+}
+
+/* Botón Volver al Hub (desktop y móvil) */
+.nav .hub-link {
+  background-color: #880430;
+  color: #fff !important;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+  transition: background-color 0.2s, color 0.2s;
+}
+.nav .hub-link:hover {
+  background-color: #66b5cb;
+  color: #fff !important;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.desktop-btn {
+  display: inline-flex;
+}
+
+/* Botones auth (desktop)*/
+.login-btn {
+  background-color: #bebebe;
+  color: #111;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+.login-btn:hover {
+  background-color: #66b5cb;
+  color: #fff;
+}
+
+.register-botn {
+  background-color: #880430;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+.register-botn:hover {
+  background-color: #66b5cb;
+  color: #fff;
+}
+
+/* Botón menú (hamburguesa)*/
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #111;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.menu-toggle:focus-visible {
+  outline: 2px solid #66b5cb;
+  outline-offset: 2px;
+}
+
+/* Contenedor de acciones en el menú móvil */
+.nav-buttons {
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/*Accesibilidad (focus)*/
+.nav a:focus-visible,
+.login-btn:focus-visible,
+.register-btn:focus-visible,
+.profile-btn:focus-visible,
+.profile-dropdown > button:focus-visible {
+  outline: 2px solid #66b5cb;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/*Menú de perfil (desktop)*/
+.profile-menu {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  max-height: calc(70px - 16px);
+  transform: translateY(var(--profile-offset-y));
+}
+
+/* --- Botón circular: sólo el círculo --- */
+.profile-btn.profile-btn--circle {
+  width: var(--profile-avatar-size);
+  height: var(--profile-avatar-size);
+  padding: 0;
+  border: none;
+  background: transparent; /* sin entorno */
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  color: #111;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Sin outline/borde negro en click */
+.profile-btn.profile-btn--circle:focus {
+  outline: none;
+}
+.profile-btn.profile-btn--circle::-moz-focus-inner {
+  border: 0;
+}
+
+/* Círculo con color base + icono SVG centrado */
+.profile-btn.profile-btn--circle .profile-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--profile-avatar-bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.profile-btn.profile-btn--circle .profile-avatar svg {
+  width: 60%;
+  height: 60%;
+  fill: #8d8d8d; /* color de la silueta */
+  pointer-events: none;
+}
+
+/* Hover: sólo cambia el color del círculo */
+.profile-btn.profile-btn--circle:hover .profile-avatar {
+  background: var(--profile-avatar-hover);
+}
+
+/* Focus accesible en el borde del círculo */
+.profile-btn.profile-btn--circle:focus-visible {
+  outline: 2px solid #66b5cb;
+  outline-offset: 2px;
+}
+
+/*Dropdown de perfil (desktop)*/
+.profile-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 180px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 4px;
+  z-index: 1200;
+  max-height: 60vh;
+  overflow: auto;
+}
+
+/* Botones del dropdown: hover/active celeste y sin entorno negro */
+.profile-dropdown > button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #111;
+  font-weight: 500;
+  transition: background-color 0.2s, color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.profile-dropdown > button:hover {
+  background-color: #66b5cb;
+  color: #fff;
+}
+.profile-dropdown > button:active {
+  background-color: #58a9be;
+  color: #fff;
+  outline: none;
+}
+.profile-dropdown > button:focus {
+  outline: none;
+}
+.profile-dropdown > button::-moz-focus-inner {
+  border: 0;
+}
+.profile-dropdown > button:focus-visible {
+  outline: 2px solid #66b5cb;
+  outline-offset: 2px;
+  background-color: #66b5cb;
+  color: #fff;
+}
+.profile-dropdown > .logout-btn {
+  color: #b00020;
+}
+.profile-dropdown > .logout-btn:hover,
+.profile-dropdown > .logout-btn:focus-visible {
+  color: #fff;
+}
+
+/* Screenreader-only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/*Responsive (móvil)*/
+@media (max-width: 1020px) {
+  .nav {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background-color: #ffffff; /* fondo claro del panel */
+    flex-direction: column;
+    width: 240px;
+    display: none;
+    padding: 1rem;
+    z-index: 1100;
+  }
+  .nav.open {
+    display: flex;
+  }
+
+  .nav a {
+    color: #000;
+    padding: 0.9rem 0;
+    font-weight: 600;
+  }
+  .nav a:hover {
+    color: #66b5cb;
+  }
+
+  .nav .hub-link {
+    padding: 0.8rem 0.9rem;
+    border-radius: 12px;
+    justify-content: center;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+  .desktop-btn {
+    display: none;
+  }
+
+  .nav-buttons {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  /*“Mi perfil” en GRIS (como Iniciar Sesión) */
+  .nav-buttons .profile-mobile {
+    appearance: none;
+    background: #bebebe; /* gris */
+    color: #111; /* texto oscuro */
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 0.8rem 0.9rem;
+    border-radius: 12px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-buttons .profile-mobile:hover {
+    background-color: #66b5cb; 
+    color: #fff;
+    border-color: transparent;
+  }
+  .nav-buttons .profile-mobile:active {
+    background-color: #58a9be;
+    color: #fff;
+    outline: none;
+  }
+  .nav-buttons .profile-mobile:focus {
+    outline: none;
+  }
+  .nav-buttons .profile-mobile:focus-visible {
+    outline: 2px solid #66b5cb;
+    outline-offset: 2px;
+  }
+
+  /* “Cerrar sesión” se queda en GUINDO */
+  .nav-buttons .logout-btn {
+    appearance: none;
+    background: #880430;
+    color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 0.8rem 0.9rem;
+    border-radius: 12px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-buttons .logout-btn:hover {
+    background-color: #66b5cb; 
+    color: #111;
+    border-color: transparent;
+  }
+  .nav-buttons .logout-btn:active {
+    background-color: #58a9be;
+    color: #111;
+    outline: none;
+  }
+  .nav-buttons .logout-btn:focus {
+    outline: none;
+  }
+  .nav-buttons .logout-btn:focus-visible {
+    outline: 2px solid #66b5cb;
+    outline-offset: 2px;
+  }
+
+  /* En móvil ocultamos el botón circular del header */
+  .profile-menu {
+    display: none !important;
+  }
+}
+
+/*Responsive (desktop)*/
+@media (min-width: 1021px) {
+  .nav-buttons {
+    display: none !important;
+  }
+  .profile-menu {
+    display: inline-flex !important;
+  }
+}

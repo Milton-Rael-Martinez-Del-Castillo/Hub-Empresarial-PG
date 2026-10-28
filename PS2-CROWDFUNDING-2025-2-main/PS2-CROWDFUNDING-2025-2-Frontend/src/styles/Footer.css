@@ -1,0 +1,126 @@
+.footer {
+  width: 100%;
+  background-color: #8d8d8d;
+  color: white;
+  box-sizing: border-box;
+  padding-bottom: 1px;
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  align-items: center;
+}
+
+.footer-section h4 {
+  position: relative;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+}
+
+.footer-section h4::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(
+    270deg,
+    #61dafb,
+    #880430,
+    #e1306c,
+    #66b5cb,
+    #61dafb
+  );
+  background-size: 400% 100%;
+  animation: slide-gradient 6s ease-in-out infinite;
+}
+
+.footer-section a {
+  color: #c3c3c3ff;
+  text-decoration: none;
+  margin: 0.3rem 0;
+  transition: color 0.2s;
+}
+
+.footer-section a:hover {
+  text-decoration: underline;
+  color: #880430;
+}
+
+.socials-section div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #444;
+  padding-top: 1rem;
+  font-size: 0.9rem;
+  color: white;
+}
+.footer-section a.facebook:hover svg {
+  color: #1877f2;
+  transform: scale(1.2);
+  transition: transform 0.3s, color 0.2s;
+}
+
+.footer-section a.instagram:hover svg {
+  color: #e1306c;
+  transform: scale(1.2);
+  transition: transform 0.3s, color 0.2s;
+}
+
+.footer-section a.twitter:hover svg {
+  color: #1da1f2;
+  transform: scale(1.2);
+  transition: transform 0.3s, color 0.2s;
+}
+
+.footer-section a.youtube:hover svg {
+  color: #ff0000;
+  transform: scale(1.2);
+  transition: transform 0.3s, color 0.2s;
+}
+
+.footer-section a.tiktok:hover svg {
+  color: #daff23;
+  transform: scale(1.2);
+  transition: transform 0.3s, color 0.2s;
+}
+
+@media (max-width: 1020px) {
+  .footer-top {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-section {
+    margin: 0.5rem 0;
+  }
+}
+
+@keyframes slide-gradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 0%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}

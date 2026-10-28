@@ -1,0 +1,101 @@
+.categorias-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.categorias-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.categorias-header h2 {
+  margin: 0;
+  color: #333;
+}
+
+.btn-crear {
+  background-color: #8a1538; 
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.btn-crear:hover {
+  background-color: #6f0f2c;
+}
+
+.categorias-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.categorias-table th,
+.categorias-table td {
+  border: 1px solid #ddd;
+  padding: 0.8rem;
+  text-align: center;
+}
+
+.categorias-table th {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+.categorias-table tr:nth-child(even) {
+  background-color: #fdfdfd;
+}
+
+.categorias-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.btn-editar {
+  background-color: #66b5cb; 
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-right: 0.5rem;
+  transition: background 0.2s;
+}
+
+.btn-editar:hover {
+  background-color: #4da2b8;
+}
+
+.btn-eliminar {
+  background-color: #8a1538; /* color principal */
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-eliminar:hover {
+  background-color: #6f0f2c;
+}
+
+.loading {
+  text-align: center;
+  color: #666;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+}
+@media (max-width: 600px) {
+  .btn-editar,
+  .btn-eliminar {
+    display: block;    
+    margin-bottom: 0.5rem;
+  }
+}

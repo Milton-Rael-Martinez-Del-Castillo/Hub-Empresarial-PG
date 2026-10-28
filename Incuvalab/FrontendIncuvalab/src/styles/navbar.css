@@ -1,0 +1,80 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 10px 20px;
+    width: 100%; 
+    box-sizing: border-box;
+    position: fixed; 
+    top: 60px;
+    left: 0;
+    z-index: 999; 
+    font-family: 'Montserrat', sans-serif; 
+}
+
+.logo {
+    height: 150px;  
+    width: 150px;   
+    margin-left: 150px; 
+    margin-right: 50px; 
+    margin-top: -20px; 
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    margin-left: 50px; 
+    margin-top: -20px; 
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative; 
+    transition: color 0.3s ease; 
+    font-family: 'Montserrat', sans-serif; 
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px; 
+    background-color: #880043;
+    transition: width 0.3s ease; 
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-links a:hover {
+    color: #880043; 
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        top: 100px; 
+    }
+
+    .logo {
+        margin-left: 0; 
+        margin-right: 0; 
+        margin-top: -30px; 
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-left: 0; 
+        margin-top: 0px; 
+    }
+}
