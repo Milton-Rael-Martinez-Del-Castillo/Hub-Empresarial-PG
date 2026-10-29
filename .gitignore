@@ -3,3 +3,7 @@
 .env.*.local
 !.env.example
 .venv/
+node_modules/
+dist/
+__pycache__/
+*.pyc
