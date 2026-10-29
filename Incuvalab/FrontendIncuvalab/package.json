@@ -67,7 +67,7 @@
     "vite": "^6.2.0",
     "vitest": "^3.2.7"
   },
-  "description": "<<<<<<< HEAD\r # INCUVALAB\r PR-25-EMPRENDIMIENTOS \r =======\r # React + Vite",
+  "description": "INCUVALAB - PR-25-EMPRENDIMIENTOS",
   "main": "eslint.config.js",
   "keywords": [],
   "author": "",

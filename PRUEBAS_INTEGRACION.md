@@ -13,7 +13,7 @@ En las siguientes tablas, cada fila representa un caso de prueba de integración
 | Incuvalab-Frontend | React + Vite | 8081 |
 | Incuvalab-Backend | Node.js + Express 5 + MySQL | 8000 |
 | Crowdfunding-Frontend | React + Vite | 8082 |
-| Crowdfunding-Backend | Node.js + Express 4 + MySQL | 4000 |
+| Crowdfunding-Backend | Node.js + Express 4 + MySQL | 4001 (contenedor 4000) |
 
 **Verificación automatizada (2026-09-24):**
 
@@ -77,7 +77,7 @@ En las siguientes tablas, cada fila representa un caso de prueba de integración
 
 | Caso de Prueba | Escenario de prueba | Pasos de la prueba | Resultado esperado | Éxito / Fracaso |
 |---|---|---|---|---|
-| 1 | Consultar proyectos con Crowdfunding disponible. | 1. Levantar Crowdfunding-Backend (4000) con proyectos registrados. 2. Iniciar sesión como admin en el Hub. 3. Abrir pestaña "Proyectos (Crowdfunding)". | El Hub-Backend consulta el Crowdfunding, mapea cada proyecto a `IdProyecto, Titulo, Categoria, DescripcionCorta, ImagenPrincipal, EstadoAprobacion, NombreCreador, ApellidoCreador` y devuelve HTTP 200. El panel los muestra con estado (Activo/Pendiente). | Éxito |
+| 1 | Consultar proyectos con Crowdfunding disponible. | 1. Levantar Crowdfunding-Backend (4001 en el host) con proyectos registrados. 2. Iniciar sesión como admin en el Hub. 3. Abrir pestaña "Proyectos (Crowdfunding)". | El Hub-Backend consulta el Crowdfunding, mapea cada proyecto a `IdProyecto, Titulo, Categoria, DescripcionCorta, ImagenPrincipal, EstadoAprobacion, NombreCreador, ApellidoCreador` y devuelve HTTP 200. El panel los muestra con estado (Activo/Pendiente). | Éxito |
 | 2 | Consultar proyectos sin sesión. | 1. Llamar a `GET /api/hub/proyectos-crowdfunding` sin token. | El middleware devuelve HTTP 401. | Éxito |
 | 3 | Crowdfunding-Backend apagado. | 1. Detener Crowdfunding-Backend. 2. Abrir la pestaña "Proyectos (Crowdfunding)". | El Hub-Backend responde HTTP 502 "No se pudieron obtener los proyectos de Crowdfunding" y el panel muestra el mensaje de error sin detener las demás pestañas. | Éxito |
 
@@ -123,7 +123,7 @@ En las siguientes tablas, cada fila representa un caso de prueba de integración
 | 3 | Emprendedor intenta entregar una tarea ajena. | 1. Como Emprendedor, intentar entregar una asignación de otro mentee. | El backend responde HTTP 404 "Asignación no encontrada". | Éxito |
 | 4 | Emprendedor adjunta un formato no soportado. | 1. Al entregar, adjuntar un archivo `.exe`. 2. Enviar. | El backend rechaza la subida (multer: "Formato de archivo no soportado") y no se registra la entrega. | Éxito |
 
-### Caso de Uso: Formularios de Captación ↔ Panel de Administración
+### Caso de Uso: Formularios de Captación y Persistencia
 
 | Caso de Prueba | Escenario de prueba | Pasos de la prueba | Resultado esperado | Éxito / Fracaso |
 |---|---|---|---|---|
@@ -143,9 +143,7 @@ En las siguientes tablas, cada fila representa un caso de prueba de integración
 | 1 | Navegación del Hub a Incuvalab. | 1. Abrir el Hub (8080). 2. Hacer clic en la tarjeta o enlace "Incuvalab" del menú. | Se redirige a `http://localhost:8081` y se carga la aplicación Incuvalab completa. | Éxito |
 | 2 | Navegación del Hub a Crowdfunding. | 1. Abrir el Hub (8080). 2. Hacer clic en la tarjeta o enlace "Crowdfunding" del menú. | Se redirige a `http://localhost:8082` y se carga la plataforma de crowdfunding. | Éxito |
 | 3 | Navegación interna del Hub a UMA y NAE. | 1. Abrir el Hub (8080). 2. Hacer clic en las tarjetas UMA y NAE. | Se navega a `/uma` y `/nae` dentro de la SPA sin salir del Hub. | Éxito |
-| 4 | Panel admin: acceso directo al panel de administración de Incuvalab. | 1. Iniciar sesión como admin en el Hub. 2. En "Accesos directos", pulsar "Panel de administración" de Incuvalab. | Se abre `http://localhost:8081/admin-dashboard` e Incuvalab aplica su propia validación de rol. | Éxito |
-| 5 | Panel admin: acceso directo al panel de administración de Crowdfunding. | 1. Iniciar sesión como admin en el Hub. 2. En "Accesos directos", pulsar "Panel de administración" de Crowdfunding. | Se abre `http://localhost:8082/admin/perfil` en la plataforma externa. | Éxito |
-| 6 | Carga simultánea de los datos de todos los módulos en el panel. | 1. Iniciar sesión como admin en el Hub. 2. Abrir `/admin` y observar las cinco pestañas. | El panel consulta en paralelo solicitudes NAE, UMA, casos NAE, mentores (proxy Incuvalab) y proyectos (proxy Crowdfunding); si una fuente falla, muestra el error solo en esa pestaña. | Éxito |
+| 4 | Carga simultánea de los datos de todos los módulos en el panel. | 1. Iniciar sesión como admin en el Hub. 2. Abrir `/admin` y observar las cinco pestañas. | El panel consulta en paralelo solicitudes NAE, UMA, casos NAE, mentores (proxy Incuvalab) y proyectos (proxy Crowdfunding); si una fuente falla, muestra el error solo en esa pestaña. | Éxito |
 
 ---
 
@@ -153,7 +151,7 @@ En las siguientes tablas, cada fila representa un caso de prueba de integración
 
 | Resultado | Cantidad de casos |
 |---|---|
-| Éxito | 41 |
+| Éxito | 39 |
 | Fracaso | 0 |
 
-**Nota:** Las pruebas de los apartados 2 y 3 requieren que los backends de Incuvalab (8000) y Crowdfunding (4000) estén levantados, tal como configura `docker-compose.yml` (red compartida `hub-network`). El caso 3 del apartado 2 y el caso 3 del apartado 3 verifican además la degradación controlada (HTTP 502) cuando el módulo externo no está disponible.
+**Nota:** Las pruebas de los apartados 2 y 3 requieren que los backends de Incuvalab (8000) y Crowdfunding (4001 en el host) estén levantados, tal como configura `docker-compose.yml` (red compartida `hub-network`). El caso 3 del apartado 2 y el caso 3 del apartado 3 verifican además la degradación controlada (HTTP 502) cuando el módulo externo no está disponible.
